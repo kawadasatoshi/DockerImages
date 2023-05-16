@@ -1,14 +1,25 @@
 version: '3'
 
 services:
+  proxy:
+    container_name: nginx
+    build:
+      ./nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/html:/usr/share/nginx/html
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - app
   app:
     container_name: django
     build: ./django
     volumes:
      - ./django/code/:/code
     ports:
-     - 80:80
-    command: python mysite/manage.py runserver 0.0.0.0:80
+      - "5000:5000"
+    command: python mysite/manage.py runserver 0.0.0.0:5000
     depends_on:
       - db
   db:
