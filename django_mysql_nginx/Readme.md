@@ -300,7 +300,7 @@ docker-compose up app -d
 
 
 
-
+http://127.0.0.1/
 
 
 
